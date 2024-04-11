@@ -1,76 +1,46 @@
+import { React, useContext } from 'react';
+import { StyleSheet, Text, View, Pressable, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { supabase } from './supabaseClient';
-import { React, useEffect, useState, useContext } from 'react';
+import { containers, images, buttons } from './client/styleSheet';
 
 import { UserContext, UserProvider } from './client/contexts/userContext';
 import { OwnedObjectsProvider } from './client/contexts/profileContext';
 
-export default function Entry(){
+export default function Entry({ navigation }){
 
-    const [ fish, setFish ] = useState([])
-    const [ plants, setPlants ] = useState([])
-
-    let getDbFish = async() => await supabase
-        .from('FreshwaterFish')
-        .select()
-
-    let getDbPlants = async() => await supabase
-        .from('Plants')
-        .select()
-
-
-    useEffect(() => {
-        getDbFish()
-        .then(dbData => {
-            // console.log(dbData)
-            setFish(dbData.data)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }, [])
-
-    useEffect(() => {
-        getDbPlants()
-        .then(dbData => {
-            // console.log(dbData)
-            setPlants(dbData.data)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }, [])
-
-    if(fish.length > 0 && plants.length > 0){
-        let image = fish[7].image
-        let plantImage = plants[1].image
+    const handleNavigate = (destination) => {
+        let routes = {
+            "Home":"Landing Page",
+            "Library":"The Library",
+            "TankTester":"TankTester"
+        }
+        navigation.navigate(routes[destination])
+    }
       
-    
-    
-    
-
     return (
-        <View style={styles.container}>
-            <Text>I am Tankio</Text>
-            <View>
-                <Image source={{ uri: image}} style={styles.image}/>
-                <Image source={{ uri: plantImage}} style={styles.image}/>
-            </View>
+        <View style={containers.appContainer}>
+            <Text>
+                I am Tankio Landing Page
+            </Text>
+            <Pressable
+                title='Library'
+                style={buttons.smallButton}
+                onPressOut={(e) => handleNavigate(e._targetInst.memoizedProps.title)}
+                >
+                <Text>
+                    Library
+                </Text>
+            </Pressable>
+            <Pressable
+                title='TankTester'
+                style={buttons.smallButton}
+                onPressOut={(e) => handleNavigate(e._targetInst.memoizedProps.title)}
+                >
+                <Text>
+                    TankTester
+                </Text>
+            </Pressable>
             <StatusBar style="auto" />
         </View>
     )
-}}
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    image: {
-      width: 200,
-      height: 200,
-  },
-  })
+}
