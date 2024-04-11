@@ -22,6 +22,10 @@ const containers = StyleSheet.create({
         flexDirection:'column',
         backgroundColor: '#fff',
     },
+    basicContainer: {
+        marginTop: 40,
+        padding: 12,
+    },
 })
 
 const buttons = StyleSheet.create({
@@ -34,4 +38,21 @@ const buttons = StyleSheet.create({
     },
 })
 
-export { images, containers, buttons }
+const spacing = StyleSheet.create({
+    verticallySpaced: {
+        paddingTop: 4,
+        paddingBottom: 4,
+        alignSelf: 'stretch',
+      },
+})
+
+const margins = StyleSheet.create({
+    mt10: {
+        marginTop: 10,
+    },
+    mt20: {
+        marginTop: 20,
+    },
+})
+
+export { images, containers, buttons, margins, spacing }

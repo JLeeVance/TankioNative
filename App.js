@@ -1,56 +1,43 @@
 import Entry from './entry';
 import TheLibraryLanding from './client/pages/theLibraryLanding';
 import TankTesterLanding from './client/pages/tankTesterLanding';
+import SigninSignup from './client/pages/signinSignup';
+
+import AuthenticatedApp from './client/routes/authenticatedApp';
+import UnAuthenticatedApp from './client/routes/unAuthenticatedApp';
 
 import { UserProvider } from './client/contexts/userContext';
 import { OwnedObjectsProvider } from './client/contexts/profileContext';
+import { AuthContext, AuthProvider } from './client/contexts/tokenContext';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View } from 'react-native';
 
 import { containers } from './client/styleSheet'
+import { useContext } from 'react';
 
-const Stack = createNativeStackNavigator();
+import AppEntry from './appEntry';
 
 
 export default function App() {
-
-
+  
+ 
 
   // const { user, setUser } = useContext(UserContext)
   // const { ownedObjects, setOwnedObjects } = useContext(OwnedObjectsContext)
-
   
-  return (
+  return(
+    <AuthProvider>
       <UserProvider>
         <OwnedObjectsProvider>
-         
-            <NavigationContainer>
-              <Stack.Navigator
-                initialRouteName='Landing Page'
-                >
-                <Stack.Screen
-                  name='Landing Page'
-                  component={Entry}           
-                  />
-                <Stack.Screen
-                  name='The Library'
-                  component={TheLibraryLanding}
-                  />
-                <Stack.Screen
-                  name='TankTester'
-                  component={TankTesterLanding}
-                  />
-              </Stack.Navigator>
-            </NavigationContainer>
-    
+          <NavigationContainer>
+            <AppEntry />
+          </NavigationContainer>
         </OwnedObjectsProvider>
       </UserProvider>
-   
-    
-
+    </AuthProvider>
   )
+
 };
 
 
