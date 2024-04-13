@@ -5,6 +5,12 @@ const images = StyleSheet.create({
         width: 200,
         height: 200,
     },
+    cardImage: {
+        width: '100%',
+        height: 200,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+      },
 })
 
 const containers = StyleSheet.create({
@@ -26,6 +32,25 @@ const containers = StyleSheet.create({
         marginTop: 40,
         padding: 12,
     },
+    card: {
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 4,
+        marginVertical: 6,
+      },
+    cardContent: {
+        marginHorizontal: 18,
+        marginVertical: 10,
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 })
 
 const buttons = StyleSheet.create({
@@ -41,8 +66,7 @@ const buttons = StyleSheet.create({
 const spacing = StyleSheet.create({
     verticallySpaced: {
         paddingTop: 4,
-        paddingBottom: 4,
-        alignSelf: 'stretch',
+        paddingBottom: 4
       },
 })
 
@@ -52,6 +76,12 @@ const margins = StyleSheet.create({
     },
     mt20: {
         marginTop: 20,
+    },
+    mt25: {
+        marginTop: 25,
+    },
+    mt30: {
+        marginTop: 30
     },
 })
 

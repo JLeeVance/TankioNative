@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import { supabase } from "../../supabaseClient"
 import { images, buttons, containers } from  "../styleSheet.js"
 
+import LibraryCard from "../components/libraryCard.js"
+
 export default function TheLibraryLanding({ navigation }){
 
     const handleNavigate = (destination) => {
@@ -16,6 +18,7 @@ export default function TheLibraryLanding({ navigation }){
 
     const [ fish, setFish ] = useState([])
     const [ plants, setPlants ] = useState([])
+    const [ objsToRender, setObjsToRender ] = useState([])
 
     let getDbFish = async() => await supabase
         .from('FreshwaterFish')
@@ -47,22 +50,33 @@ export default function TheLibraryLanding({ navigation }){
         })
     }, [])
 
-    let testImgList = plants.map(plant => <Image source={{ uri: plant.image}} key={plant.scientific_name} style={images.smallImg} />)
+    useEffect(() => {
+        setObjsToRender([...fish, ...plants])
+    }, [fish, plants])
 
+    if(objsToRender.length > 0){
 
-    if(fish.length > 0 && plants.length > 0){
+        const testImgList = objsToRender.map(obj => {
+            if(obj.fish === false){
+              return <Image source={{ uri: obj.image }} key={obj.common_name} style={images.smallImg} />;
+            }
+        })
+
+        const cardsToRender = objsToRender.map(obj => {
+            return <LibraryCard image={obj.image} key={obj.common_name} common_name={obj.common_name} scientific_name={obj.scientific_name} style={images.smallImg} />;
+        })
 
         return(
             <ScrollView style={containers.libraryContainer}>
                 <Text>
                     This is the The Library Landing
                 </Text>
-                {testImgList}
+                {cardsToRender}
                 <Pressable
-                title='Home'
-                style={buttons.smallButton}
-                onPressOut={(e) => handleNavigate(e._targetInst.memoizedProps.title)}
-                >
+                    title='Home'
+                    style={buttons.smallButton}
+                    onPressOut={(e) => handleNavigate(e._targetInst.memoizedProps.title)}
+                    >
                     <Text>
                         Home
                     </Text>

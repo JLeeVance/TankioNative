@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
 import { supabase } from "../../supabaseClient";
-import { View, Text, Pressable, Alert } from "react-native";
+import { View, Text, Pressable, Alert, TextInput } from "react-native";
 import { spacing, margins, containers } from "../styleSheet";
-import { Input } from 'react-native-elements'
 import { AuthContext } from "../contexts/tokenContext";
 
 
@@ -64,7 +63,7 @@ export default function SigninSignup({navigation}){
   return(
       <View style={containers.basicContainer}>
           <View style={[spacing.verticallySpaced, margins.mt20]}>
-              <Input
+              <TextInput
                   label='Email'
                   leftIcon={{ type: 'font-awesome', name: 'envelope'}}
                   onChangeText={(text) => setEmail(text)}
@@ -74,7 +73,7 @@ export default function SigninSignup({navigation}){
               />
           </View>
           <View style={spacing.verticallySpaced}>
-              <Input  
+              <TextInput  
                   label='Password'
                   leftIcon={{ type: 'font-awesome', name: 'lock'}}
                   onChangeText={(text) => setPassword(text)}

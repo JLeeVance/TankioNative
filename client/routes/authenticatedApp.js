@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { AuthContext } from "../contexts/tokenContext"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
-import Entry from "../../entry"
+import Entry from "../pages/entry"
 import TheLibraryLanding from "../pages/theLibraryLanding"
 import TankTesterLanding from "../pages/tankTesterLanding"
 import { View, Text, Pressable } from "react-native"

@@ -1,10 +1,7 @@
-import { React, useContext } from 'react';
-import { StyleSheet, Text, View, Pressable, Button } from 'react-native';
+import { React } from 'react';
+import { Text, View, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { containers, images, buttons } from './client/styleSheet';
-
-import { UserContext, UserProvider } from './client/contexts/userContext';
-import { OwnedObjectsProvider } from './client/contexts/profileContext';
+import { containers, buttons } from '../styleSheet';
 
 export default function Entry({ navigation }){
 

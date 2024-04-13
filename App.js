@@ -1,4 +1,4 @@
-import Entry from './entry';
+import Entry from './client/pages/entry';
 import TheLibraryLanding from './client/pages/theLibraryLanding';
 import TankTesterLanding from './client/pages/tankTesterLanding';
 import SigninSignup from './client/pages/signinSignup';
