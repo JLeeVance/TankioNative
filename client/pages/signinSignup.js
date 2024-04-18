@@ -9,6 +9,7 @@ export default function SigninSignup({navigation}){
 
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+  const [ username, setUsername ] = useState('')
   const [ loading, setLoading ] = useState(false)
 
   const { updateToken } = useContext(AuthContext)
@@ -17,6 +18,7 @@ export default function SigninSignup({navigation}){
       setLoading(true);
       try {
         const { data: { session }, error } = await supabase.auth.signInWithPassword({
+          display_name: username,
           email: email,
           password: password,
         });
@@ -37,6 +39,7 @@ export default function SigninSignup({navigation}){
       setLoading(true);
       try {
         const { data: { session }, error } = await supabase.auth.signUp({
+          display_name: username,
           email: email,
           password: password,
         });
@@ -63,6 +66,16 @@ export default function SigninSignup({navigation}){
   return(
       <View style={containers.basicContainer}>
           <View style={[spacing.verticallySpaced, margins.mt20]}>
+              <TextInput
+                  label='Username'
+                  leftIcon={{ type: 'font-awesome', name: 'person'}}
+                  onChangeText={(text) => setUsername(text)}
+                  value={username}
+                  placeholder='Username'
+                  autoCapitalize={'none'}
+              />
+          </View>
+          <View style={[spacing.verticallySpaced]}>
               <TextInput
                   label='Email'
                   leftIcon={{ type: 'font-awesome', name: 'envelope'}}
